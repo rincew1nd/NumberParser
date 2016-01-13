@@ -40,9 +40,9 @@
             // 
             // TranButton
             // 
-            this.TranButton.Location = new System.Drawing.Point(162, 57);
+            this.TranButton.Location = new System.Drawing.Point(347, 97);
             this.TranButton.Name = "TranButton";
-            this.TranButton.Size = new System.Drawing.Size(75, 25);
+            this.TranButton.Size = new System.Drawing.Size(265, 63);
             this.TranButton.TabIndex = 0;
             this.TranButton.Text = "Перевести";
             this.TranButton.UseVisualStyleBackColor = true;
@@ -51,65 +51,72 @@
             // NumberLable
             // 
             this.NumberLable.AutoSize = true;
-            this.NumberLable.Location = new System.Drawing.Point(12, 89);
+            this.NumberLable.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
+            this.NumberLable.Location = new System.Drawing.Point(12, 97);
             this.NumberLable.Name = "NumberLable";
-            this.NumberLable.Size = new System.Drawing.Size(57, 13);
+            this.NumberLable.Size = new System.Drawing.Size(108, 25);
             this.NumberLable.TabIndex = 1;
             this.NumberLable.Text = "Числовой";
             // 
             // NumberOutput
             // 
             this.NumberOutput.AutoSize = true;
-            this.NumberOutput.Location = new System.Drawing.Point(82, 89);
+            this.NumberOutput.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
+            this.NumberOutput.Location = new System.Drawing.Point(222, 97);
             this.NumberOutput.MaximumSize = new System.Drawing.Size(287, 20);
             this.NumberOutput.Name = "NumberOutput";
-            this.NumberOutput.Size = new System.Drawing.Size(13, 13);
+            this.NumberOutput.Size = new System.Drawing.Size(24, 20);
             this.NumberOutput.TabIndex = 2;
             this.NumberOutput.Text = "0";
             // 
             // NumberInput
             // 
-            this.NumberInput.Location = new System.Drawing.Point(85, 31);
+            this.NumberInput.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
+            this.NumberInput.Location = new System.Drawing.Point(162, 34);
             this.NumberInput.Name = "NumberInput";
-            this.NumberInput.Size = new System.Drawing.Size(287, 20);
+            this.NumberInput.Size = new System.Drawing.Size(450, 31);
             this.NumberInput.TabIndex = 3;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 34);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.4F);
+            this.label3.Location = new System.Drawing.Point(12, 37);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(67, 13);
+            this.label3.Size = new System.Drawing.Size(128, 25);
             this.label3.TabIndex = 4;
             this.label3.Text = "Английский";
             // 
             // errorLable
             // 
             this.errorLable.AutoSize = true;
-            this.errorLable.Location = new System.Drawing.Point(12, 122);
-            this.errorLable.MaximumSize = new System.Drawing.Size(360, 0);
-            this.errorLable.MinimumSize = new System.Drawing.Size(360, 0);
+            this.errorLable.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
+            this.errorLable.Location = new System.Drawing.Point(37, 185);
+            this.errorLable.MaximumSize = new System.Drawing.Size(550, 0);
+            this.errorLable.MinimumSize = new System.Drawing.Size(550, 0);
             this.errorLable.Name = "errorLable";
-            this.errorLable.Size = new System.Drawing.Size(360, 13);
+            this.errorLable.Size = new System.Drawing.Size(550, 25);
             this.errorLable.TabIndex = 5;
             this.errorLable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // staroslavNum
             // 
             this.staroslavNum.AutoSize = true;
-            this.staroslavNum.Location = new System.Drawing.Point(232, 89);
+            this.staroslavNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
+            this.staroslavNum.Location = new System.Drawing.Point(222, 135);
             this.staroslavNum.MaximumSize = new System.Drawing.Size(287, 20);
             this.staroslavNum.Name = "staroslavNum";
-            this.staroslavNum.Size = new System.Drawing.Size(13, 13);
+            this.staroslavNum.Size = new System.Drawing.Size(24, 20);
             this.staroslavNum.TabIndex = 7;
             this.staroslavNum.Text = "0";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(129, 89);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
+            this.label2.Location = new System.Drawing.Point(12, 135);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(97, 13);
+            this.label2.Size = new System.Drawing.Size(188, 25);
             this.label2.TabIndex = 6;
             this.label2.Text = "Старославянский";
             // 
@@ -117,7 +124,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 216);
+            this.ClientSize = new System.Drawing.Size(632, 313);
             this.Controls.Add(this.staroslavNum);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.errorLable);
