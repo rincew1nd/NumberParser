@@ -15,3 +15,12 @@ C:\Users\titov\Documents\Visual Studio 2013\Projects\NumberConvertation\NumberCo
 C:\Users\titov\Documents\Visual Studio 2013\Projects\NumberConvertation\NumberConvertation\obj\Debug\NumberConvertation.csproj.GenerateResource.Cache
 C:\Users\titov\Documents\Visual Studio 2013\Projects\NumberConvertation\NumberConvertation\obj\Debug\NumberConvertation.exe
 C:\Users\titov\Documents\Visual Studio 2013\Projects\NumberConvertation\NumberConvertation\obj\Debug\NumberConvertation.pdb
+C:\Users\titov\Documents\NumberParser\NumberConvertation\bin\Debug\NumberConvertation.exe.config
+C:\Users\titov\Documents\NumberParser\NumberConvertation\bin\Debug\NumberConvertation.exe
+C:\Users\titov\Documents\NumberParser\NumberConvertation\bin\Debug\NumberConvertation.pdb
+C:\Users\titov\Documents\NumberParser\NumberConvertation\obj\Debug\NumberConvertation.csprojResolveAssemblyReference.cache
+C:\Users\titov\Documents\NumberParser\NumberConvertation\obj\Debug\NumberConvertation.Form1.resources
+C:\Users\titov\Documents\NumberParser\NumberConvertation\obj\Debug\NumberConvertation.Properties.Resources.resources
+C:\Users\titov\Documents\NumberParser\NumberConvertation\obj\Debug\NumberConvertation.csproj.GenerateResource.Cache
+C:\Users\titov\Documents\NumberParser\NumberConvertation\obj\Debug\NumberConvertation.exe
+C:\Users\titov\Documents\NumberParser\NumberConvertation\obj\Debug\NumberConvertation.pdb

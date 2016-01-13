@@ -20,18 +20,18 @@ namespace NumberConvertation
         {
             ErrorDic = new Dictionary<string, string>{
                 // Проверки строки
-                {"empty" , "Не заполнена строка"},
-                {"spaces" , "В строке не должны быть только пробелы"},
-                {"undefinedsymbols" , "Числа нужно вводить латинскими буквами"},
+                {"empty" , "Пустая строка"},
+                {"spaces" , "В строке только пробелы"},
+                {"undefinedsymbols" , "Строка содержит не только латинские символы"},
                 // Проверки слов
-                {"notfinded" , "Не удалось распознать слово\r\n"},
+                {"notfinded" , "Не удалось распознать слово "},
                 {"hundreds" , "hundreds - существительное, а не число."},
                 // Проверки слов между дэшей
-                {"toomanydashes" , "Тире может разделять только два слова.\r\n"},
-                {"wrongdash" , "Между тире находятся слова не из словаря.\r\n"},
-                {"dashedword" , "Слова между тире не подходят под правила:\r\nТире разделяет числа единичного формата с сотнями или числа дестичного формата с числами единичного формата.\r\n"},
+                {"toomanydashes" , "Тире разделяет боллее двух слов.\r\n"},
+                {"wrongdash" , "Не удалось распознать слово \r\n"},
+                {"dashedword" , "Тире разделяет неверные слова.\r\n"},
                 // Проверка слов между and и zero
-                {"wrongand" , "And может соединять только сотни и чисела десятичного формата.\r\n"},
+                {"wrongand" , "Неверные слова между And.\r\n"},
                 {"lastand" , "And находится в конце.\r\n"},
                 {"firstand" , "And находится в начале.\r\n"},
                 {"zero" , "Ничего не может идти перед и после 0."},
@@ -40,7 +40,20 @@ namespace NumberConvertation
                 {"afterunits" , "После чисел единичного формата не может идти ничего кроме сотен\r\n"},
                 {"afterdozens" , "После чисел десятичного формата не может идти ничего кроме чисел единичного формата\r\n"},
                 {"afterotherdozens" , "Ничего не может идти после чисел формата 10-19\r\n"},
+                // Новые проверки
+                {"hundredAfterHundred" , "Два слова hundred подряд."},
+                {"afterWordsAfterAfterWords" , "Два числа формата 10-19 подряд.\r\n"},
+                {"dozenWordsAfterAfterWords" , "Числа формата 20-90 после чисел формата 10-19.\r\n"},
+                {"hundredAfterAfterWords" , "hundred после чисел формата 10-19.\r\n"},
+                {"afterWordsAfterDozenWords" , "Числа формата 10-19 после чисел формата 20-90.\r\n"},
+                {"dozenWordsAfterDozenWords" , "Два числа формата 20-90 подряд.\r\n"},
+                {"hundredAfterDozenWords" , "hundred после чисел формата 20-90.\r\n"},
+                {"unitsWordsAfterUnitsWords" , "Два числа формата 1-9 подряд.\r\n"},
+                {"afterWordsAfterUnitsWords" , "Числа формата 20-90 после чисел формата 1-9.\r\n"},
+                {"dozenWordsAfterUnitsWords" , "Числа формата 10-19 после чисел формата 1-9.\r\n"},
             };
+
+            #region Словари
 
             AfterWords = new List<string> {
                 "twenty", "thirty", "forty", "fifty", "sixty", "seventy",
@@ -74,6 +87,8 @@ namespace NumberConvertation
                 {"result", ""},
                 {"error", ""}
             };
+
+            #endregion
         }
 
         public string ConvertToOldRussianNumber(int num)
@@ -256,6 +271,8 @@ namespace NumberConvertation
 
         private string CheckOrder(string[] words, int position, int lastPosition)
         {
+            #region Bad shit (commited suicide)
+            /*
             if (words[position] == "hundred")
             {
                 if (position == 0)
@@ -310,6 +327,45 @@ namespace NumberConvertation
             {
                 if (position != lastPosition && words[position + 1] != "hundred")
                     return ErrorDic["afterunits"] + words[position] + " " + words[position + 1];
+            }
+            */
+            #endregion
+
+            if (position == lastPosition) return "";
+
+            if (words[position] == "hundred")
+            {
+                if (words[position + 1] == "hundred")
+                    return ErrorDic["hundredAfterHundred"] + words[position] + " " + words[position + 1];
+            }
+            if (AfterWords.Contains(words[position]))
+            {
+                if (AfterWords.Contains(words[position+1]))
+                    return ErrorDic["afterWordsAfterAfterWords"] + words[position] + " " + words[position + 1];
+                if (DozenWords.Contains(words[position+1]))
+                    return ErrorDic["dozenWordsAfterAfterWords"] + words[position] + " " + words[position + 1];
+                if (words[position + 1] == "hundred")
+                    return ErrorDic["hundredAfterAfterWords"] + words[position] + " " + words[position + 1];
+            }
+
+            if (DozenWords.Contains(words[position]))
+            {
+                if (AfterWords.Contains(words[position + 1]))
+                    return ErrorDic["afterWordsAfterDozenWords"] + words[position] + " " + words[position + 1];
+                if (DozenWords.Contains(words[position + 1]))
+                    return ErrorDic["dozenWordsAfterDozenWords"] + words[position] + " " + words[position + 1];
+                if (words[position + 1] == "hundred")
+                    return ErrorDic["hundredAfterDozenWords"] + words[position] + " " + words[position + 1];
+            }
+
+            if (UnitsWords.Contains(words[position]))
+            {
+                if (UnitsWords.Contains(words[position + 1]))
+                    return ErrorDic["unitsWordsAfterUnitsWords"] + words[position] + " " + words[position + 1];
+                if (AfterWords.Contains(words[position + 1]))
+                    return ErrorDic["afterWordsAfterUnitsWords"] + words[position] + " " + words[position + 1];
+                if (DozenWords.Contains(words[position + 1]))
+                    return ErrorDic["dozenWordsAfterUnitsWords"] + words[position] + " " + words[position + 1];
             }
 
             return "";
