@@ -35,22 +35,18 @@ namespace NumberConvertation
                 {"lastand" , "And находится в конце.\r\n"},
                 {"firstand" , "And находится в начале.\r\n"},
                 {"zero" , "Ничего не может идти перед и после 0."},
-                // Проверяем порядок слов
-                {"afterhundred" , "После сотен могут идти только числа десятичного формата, единицы или частицы and.\r\n"},
-                {"afterunits" , "После чисел единичного формата не может идти ничего кроме сотен\r\n"},
-                {"afterdozens" , "После чисел десятичного формата не может идти ничего кроме чисел единичного формата\r\n"},
-                {"afterotherdozens" , "Ничего не может идти после чисел формата 10-19\r\n"},
                 // Новые проверки
                 {"hundredAfterHundred" , "Два слова hundred подряд."},
                 {"afterWordsAfterAfterWords" , "Два числа формата 10-19 подряд.\r\n"},
-                {"dozenWordsAfterAfterWords" , "Числа формата 20-90 после чисел формата 10-19.\r\n"},
+                {"dozenWordsAfterAfterWords" , "Числа десятичного формата после чисел формата 10-19.\r\n"},
                 {"hundredAfterAfterWords" , "hundred после чисел формата 10-19.\r\n"},
-                {"afterWordsAfterDozenWords" , "Числа формата 10-19 после чисел формата 20-90.\r\n"},
-                {"dozenWordsAfterDozenWords" , "Два числа формата 20-90 подряд.\r\n"},
-                {"hundredAfterDozenWords" , "hundred после чисел формата 20-90.\r\n"},
-                {"unitsWordsAfterUnitsWords" , "Два числа формата 1-9 подряд.\r\n"},
-                {"afterWordsAfterUnitsWords" , "Числа формата 20-90 после чисел формата 1-9.\r\n"},
-                {"dozenWordsAfterUnitsWords" , "Числа формата 10-19 после чисел формата 1-9.\r\n"},
+                {"unitsWordsAfterDozenWords" , "Числа единичного формата после чисел десятичного формата.\r\n"},
+                {"afterWordsAfterDozenWords" , "Числа формата 10-19 после чисел десятичного формата.\r\n"},
+                {"dozenWordsAfterDozenWords" , "Два числа десятичного формата подряд.\r\n"},
+                {"hundredAfterDozenWords" , "hundred после чисел десятичного формата.\r\n"},
+                {"unitsWordsAfterUnitsWords" , "Два числа единичного формата подряд.\r\n"},
+                {"afterWordsAfterUnitsWords" , "Числа десятичного формата после чисел единичного формата.\r\n"},
+                {"dozenWordsAfterUnitsWords" , "Числа формата 10-19 после чисел единичного формата.\r\n"},
             };
 
             #region Словари
@@ -350,6 +346,8 @@ namespace NumberConvertation
 
             if (DozenWords.Contains(words[position]))
             {
+                if (UnitsWords.Contains(words[position + 1]))
+                    return ErrorDic["unitsWordsAfterDozenWords"] + words[position] + " " + words[position + 1];
                 if (AfterWords.Contains(words[position + 1]))
                     return ErrorDic["afterWordsAfterDozenWords"] + words[position] + " " + words[position + 1];
                 if (DozenWords.Contains(words[position + 1]))

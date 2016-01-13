@@ -11,6 +11,7 @@ namespace NumberConvertation
         {
             InitializeComponent();
             translator = new Translator();
+            this.AcceptButton = TranButton;
         }
 
         private void TranButton_Click(object sender, EventArgs e)
