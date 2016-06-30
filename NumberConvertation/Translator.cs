@@ -96,7 +96,7 @@ namespace NumberConvertation
                 num -= 500;
                 result += 'Ф';
             }
-            if (num >= 100)
+            while (num >= 100)
             {
                 var j = num;
                 for (var i = 0; i < j / 100; i++)
@@ -105,7 +105,7 @@ namespace NumberConvertation
                     result += 'Р';
                 }
             }
-            if (num >= 30)
+            while (num >= 30)
             {
                 var j = num;
                 for (var i = 0; i < j / 30; i++)
@@ -114,7 +114,7 @@ namespace NumberConvertation
                     result += 'Л';
                 }
             }
-            if (num >= 8)
+            while (num >= 8)
             {
                 var j = num;
                 for (var i = 0; i < j / 8; i++)
@@ -123,7 +123,7 @@ namespace NumberConvertation
                     result += 'И';
                 }
             }
-            if (num >= 2)
+            while (num >= 2)
             {
                 var j = num;
                 for (var i = 0; i < j / 2; i++)
@@ -177,7 +177,7 @@ namespace NumberConvertation
             // Переводим строку в массив строк. Сплитаем по пробелу и по дэшу
             words = stringIn.Split(new char[] { ' ', '-' }, StringSplitOptions.RemoveEmptyEntries);
 
-            // Пробегаемся по каждому элементу и ищем элементы содержащие 'and', 'hundreds' и 'zero'. Проверяем их через CheckAndValues
+            // Пробегаемся по каждому элементу и проверяем если ли слова в словаре
             foreach (var word in words)
             {
                 if (UnitsWords.Contains(word) || DozenWords.Contains(word) || AfterWords.Contains(word) || word == "hundred" || word == "and") continue;
@@ -191,23 +191,13 @@ namespace NumberConvertation
             // Пробегаемся по каждому элементу и ищем элементы содержащие 'and', 'hundreds' и 'zero'. Проверяем их через CheckAndValues
             for (var i = 0; i < words.Length; i++)
             {
-                if (i > 0 && words[i - 1] == "zero")
+                if (i > 0 && words[i] == "zero")
                     ResultDic["error"] = ErrorDic["zero"];
                 else if (words[i] == "and")
                     ResultDic["error"] = CheckAndValues(words, i, words.Length - 1);
 
                 if (ResultDic["error"] != "")
                     return ResultDic;
-            }
-
-            // Правильно ли расположен "zero"
-            for (var i = 0; i < words.Length; i++)
-            {
-                if (i > 0 && words[i] == "zero")
-                {
-                    ResultDic["error"] = ErrorDic["zero"];
-                    return ResultDic;
-                }
             }
 
             // Проверяем порядок слов
@@ -253,80 +243,22 @@ namespace NumberConvertation
 
         private string CheckAndValues(string[] words, int position, int lastposition)
         {
-            if (position == 0 && words[position] == "and")
-                return ErrorDic["firstand"];
-            if (position == lastposition)
-                return ErrorDic["lastand"];
+            if (words[position] == "and")
+            {
+                if (position == 0)
+                    return ErrorDic["firstand"];
+                if (position == lastposition)
+                    return ErrorDic["lastand"];
 
-            // Проверяем 2 элемента между дэшами
-            if (words[position - 1] == "hundred" && !(new String[] { "and", "hundred" }).Contains(words[position + 1]))
-                return "";
-            else
-                return ErrorDic["wrongand"] + words[position - 1] + " " + words[position] + " " + words[position + 1];
+                // Проверяем 2 элемента между дэшами
+                if (words[position - 1] == "hundred" && (new string[] { "and", "hundred" }).Contains(words[position + 1]))
+                    return ErrorDic["wrongand"] + words[position - 1] + " " + words[position] + " " + words[position + 1];
+            }
+            return "";
         }
 
         private string CheckOrder(string[] words, int position, int lastPosition)
         {
-            #region Bad shit (commited suicide)
-            /*
-            if (words[position] == "hundred")
-            {
-                if (position == 0)
-                {
-                    if (position == lastPosition) return "";
-                    if (!(UnitsWords.Contains(words[position + 1]) || AfterWords.Contains(words[position + 1]) ||
-                        DozenWords.Contains(words[position + 1]) || words[position + 1] == "and"))
-                        return ErrorDic["afterhundred"] + words[position] + " " + words[position + 1];
-                }
-                else if (position != lastPosition)
-                {
-                    if (!(UnitsWords.Contains(words[position + 1]) || AfterWords.Contains(words[position + 1]) ||
-                        DozenWords.Contains(words[position + 1]) || words[position + 1] == "and"))
-                        return ErrorDic["afterhundred"] + words[position - 1] + " " + words[position] + " " + words[position + 1];
-                }
-            }
-
-            if (AfterWords.Contains(words[position]))
-            {
-                if (position == 0)
-                {
-                    if (position == lastPosition)
-                        return "";
-                    if (!UnitsWords.Contains(words[position + 1]))
-                        return ErrorDic["afterdozens"] + words[position] + " " + words[position + 1];
-                }
-                else if (position != lastPosition)
-                {
-                    if (!UnitsWords.Contains(words[position + 1]))
-                        return ErrorDic["afterdozens"] + words[position] + " " + words[position + 1];
-                }
-                else
-                {
-                    return "";
-                }
-            }
-
-            if (DozenWords.Contains(words[position]))
-            {
-                if (position == 0)
-                {
-                    if (position != lastPosition)
-                        return ErrorDic["afterotherdozens"] + words[position] + " " + words[position + 1];
-                }
-                else if (position != lastPosition)
-                {
-                    return ErrorDic["afterotherdozens"] + words[position - 1] + " " + words[position] + " " + words[position + 1];
-                }
-            }
-
-            if (UnitsWords.Contains(words[position]))
-            {
-                if (position != lastPosition && words[position + 1] != "hundred")
-                    return ErrorDic["afterunits"] + words[position] + " " + words[position + 1];
-            }
-            */
-            #endregion
-
             if (position == lastPosition) return "";
 
             if (words[position] == "hundred")
@@ -334,6 +266,7 @@ namespace NumberConvertation
                 if (words[position + 1] == "hundred")
                     return ErrorDic["hundredAfterHundred"] + words[position] + " " + words[position + 1];
             }
+
             if (AfterWords.Contains(words[position]))
             {
                 if (AfterWords.Contains(words[position+1]))
